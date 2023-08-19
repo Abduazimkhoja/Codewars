@@ -8,17 +8,17 @@ let array = [
    [21, 22, 23, 24, 25],
 ];
 
-snail = function (array) {
+const snail = (array) => {
    let res = [];
-   while (array[0]) {
-      res.push(array.splice(0, 1));
-      array.forEach((v) => res.push(v.splice(-1, 1)));
-      res.push(array.splice(-1, 1).flat(1).reverse());
-      let reverse = [];
-      array.forEach((v) => reverse.push(v.splice(0, 1)));
-      res.push(reverse.flat(1).reverse());
+   while (array[0]) { // пока array не пустой выполнять этот цикл
+      res.push(array.splice(0, 1)); // вырезаем первый под массив [1, 2, 3, 4, 5]
+      array.forEach((v) => res.push(v.splice(-1, 1))); // вырезаю последний элемент под массива [10,15,20,25]
+      res.push(array.splice(-1, 1).flat(1).reverse()); // вырезаю последний под массив и переварачиваю его [21, 22, 23, 24, 25] => [25, 24, 23, 22, 21],
+      let reverse = []; // пустой массив чтобы собрать первые элементы под массива и развернуть их
+      array.forEach((v) => reverse.push(v.splice(0, 1))); // вырезаю певрый элемент под массива [6,11,16]
+      res.push(reverse.flat(1).reverse()); // переварачиваю массив [16,11,6] и добавляю в res
    }
-   return res.flat(2);
+   return res.flat(2); // возврашаю разворачивая под массивы
 };
 
 console.log(snail(array));
